@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formation — AllergoZymeProtect</title>
+  <style>
+    :root {
+      --gold: #c9a227;
+      --gold-strong: #b68f1e;
+      --white: #ffffff;
+      --ink: #2b2b2b;
+      --muted: rgba(43,43,43,.65);
+      --line: rgba(182,143,30,.16);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:var(--white);
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+
+    header{
+      position:sticky;top:0;
+      background:rgba(255,255,255,.9);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(8px);
+      z-index:100;
+    }
+    .bar{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:46px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(201,162,39,.25))}
+    .brand h1{font-size:1.2rem;color:var(--gold-strong);letter-spacing:1.3px;margin:0}
+    nav{display:flex;gap:10px;align-items:center}
+    .nav-btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--gold-strong);
+      font-weight:600;
+      cursor:pointer;
+      text-decoration:none;
+      transition:.25s;
+      box-shadow:0 6px 14px rgba(182,143,30,.08);
+    }
+    .nav-btn:hover{transform:translateY(-2px)}
+    .logout{background:linear-gradient(90deg,var(--gold),var(--gold-strong));color:#fff;border:none}
+
+    main{
+      max-width:900px;
+      margin:40px auto 100px;
+      padding:0 18px;
+      text-align:center;
+    }
+    h2{color:var(--gold-strong);font-size:1.6rem;text-shadow:0 0 10px rgba(182,143,30,.1)}
+
+    .pdf-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin:24px 0 40px;
+    }
+    .pdf-item{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:14px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:#fff;
+      box-shadow:0 8px 20px rgba(182,143,30,.05);
+    }
+    .pdf-item span{font-weight:600;color:var(--gold-strong)}
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      transition:.25s;
+    }
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-strong));
+      color:#fff;
+      box-shadow:0 10px 30px rgba(182,143,30,.2);
+    }
+    .btn.ghost{
+      background:#fff;
+      color:var(--gold-strong);
+      border:1px solid var(--line);
+    }
+    .btn:hover{transform:translateY(-2px)}
+
+    .validation{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:24px;
+      margin-top:30px;
+      box-shadow:0 10px 30px rgba(182,143,30,.06);
+      background:#fff;
+    }
+    .validation label{font-weight:600;color:var(--gold-strong);cursor:pointer;}
+    .certificat{
+      display:none;
+      margin-top:40px;
+      padding:24px;
+      border:2px solid var(--gold-strong);
+      border-radius:16px;
+      background:#fff;
+      box-shadow:0 10px 30px rgba(182,143,30,.1);
+      color:var(--gold-strong);
+      text-align:center;
+    }
+    .certificat h3{margin-top:0;color:var(--gold-strong)}
+    footer{text-align:center;padding:16px;color:var(--muted);border-top:1px solid var(--line)}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <div class="brand">
+        <img src="assets/logo.png" alt="AllergoZymeProtect" />
+        <h1>AllergoZymeProtect</h1>
+      </div>
+      <nav>
+        <a href="dashboard.html" class="nav-btn">Tableau de bord</a>
+        <a href="archivepage.html" class="nav-btn">Archives</a>
+        <button id="logoutBtn" class="nav-btn logout">Déconnexion</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h2>Formation AllergoZymeProtect</h2>
+    <p class="muted">Prenez connaissance des documents suivants pour assurer la conformité et la sécurité de votre établissement.</p>
+
+    <div class="pdf-list">
+      <div class="pdf-item">
+        <span>1. Hygiène et sécurité alimentaire</span>
+        <a href="pdf/hygiene.pdf" target="_blank" class="btn ghost">📄 Ouvrir</a>
+      </div>
+      <div class="pdf-item">
+        <span>2. Gestion des allergènes et traçabilité</span>
+        <a href="pdf/allergenes.pdf" target="_blank" class="btn ghost">📄 Ouvrir</a>
+      </div>
+      <div class="pdf-item">
+        <span>3. Procédure de validation client AllergoZymeProtect</span>
+        <a href="pdf/procedure.pdf" target="_blank" class="btn ghost">📄 Ouvrir</a>
+      </div>
+    </div>
+
+    <div class="validation">
+      <label>
+        <input id="checkOk" type="checkbox" style="transform:scale(1.3);margin-right:8px;">
+        J’ai lu et compris l’ensemble des documents ci-dessus.
+      </label>
+      <br/><br/>
+      <button id="validateBtn" class="btn gold">✅ Valider ma formation</button>
+    </div>
+
+    <div id="certificat" class="certificat">
+      <h3>Certificat de conformité — AllergoZymeProtect</h3>
+      <p id="certifInfo"></p>
+      <p><em>Validé électroniquement par le laboratoire AllergoZymeProtect.</em></p>
+      <button id="downloadCert" class="btn ghost">⬇️ Télécharger le certificat</button>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 AllergoZymeProtect — Formation & Responsabilité</footer>
+
+  <script type="module">
+    import { supabase } from './assets/supabase.js';
+    import jsPDF from "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    const checkOk = document.getElementById('checkOk');
+    const validateBtn = document.getElementById('validateBtn');
+    const certificat = document.getElementById('certificat');
+    const certifInfo = document.getElementById('certifInfo');
+    const downloadCert = document.getElementById('downloadCert');
+
+    let user=null, restaurant=null;
+
+    async function init(){
+      const auth = await supabase.auth.getUser();
+      if(!auth.data.user){ window.location.href='login.html'; return; }
+      user = auth.data.user;
+
+      const { data: resto, error } = await supabase
+        .from('restaurants')
+        .select('*')
+        .eq('contact_email', user.email)
+        .single();
+      if(error || !resto){ alert('Restaurant introuvable'); return; }
+      restaurant = resto;
+
+      if(restaurant.formation_validée){
+        showCertificate(restaurant.formation_date);
+      }
+    }
+
+    validateBtn.addEventListener('click', async ()=>{
+      if(!checkOk.checked){ alert('Veuillez confirmer la lecture des documents.'); return; }
+
+      const date = new Date().toLocaleDateString('fr-FR', { year:'numeric', month:'long', day:'numeric' });
+      await supabase.from('restaurants').update({ formation_validée:true, formation_date:new Date().toISOString() }).eq('id', restaurant.id);
+      showCertificate(date);
+    });
+
+    function showCertificate(date){
+      certificat.style.display='block';
+      certifInfo.innerHTML = `
+        <strong>${restaurant.name}</strong><br/>
+        a validé la formation le <b>${date}</b>.<br/>
+        ID établissement : ${restaurant.id}
+      `;
+    }
+
+    downloadCert.addEventListener('click', ()=>{
+      const doc = new jsPDF();
+      doc.setFontSize(18);
+      doc.setTextColor(182,143,30);
+      doc.text("Certificat de Formation AllergoZymeProtect", 20, 30);
+      doc.setFontSize(12);
+      doc.setTextColor(40,40,40);
+      doc.text(`Nom de l'établissement : ${restaurant.name}`, 20, 50);
+      doc.text(`ID : ${restaurant.id}`, 20, 58);
+      doc.text(`Formation validée le : ${new Date().toLocaleDateString('fr-FR')}`, 20, 66);
+      doc.text("Validé électroniquement par le laboratoire AllergoZymeProtect.", 20, 82);
+      doc.save(`Certificat_AllergoZymeProtect_${restaurant.name}.pdf`);
+    });
+
+    logoutBtn.addEventListener('click', async ()=>{
+      await supabase.auth.signOut();
+      window.location.href='login.html';
+    });
+
+    init();
+  </script>
+</body>
+</html>

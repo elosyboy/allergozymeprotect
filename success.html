@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paiement validé — AllergoZymeProtect</title>
+  <meta name="description" content="Paiement validé avec succès. Votre label AllergoZymeProtect est maintenant actif." />
+  <style>
+    :root {
+      --gold: #c9a227;
+      --gold-strong: #b68f1e;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: var(--white);
+      font-family: 'Poppins', sans-serif;
+      color: var(--gold-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    .logo {
+      width: 110px;
+      margin-bottom: 16px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    h1 {
+      font-size: 1.9em;
+      color: var(--gold-strong);
+      text-shadow: 0 0 18px rgba(182,143,30,0.3);
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 1em;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--gold), var(--gold-strong));
+      color: white;
+      padding: 14px 26px;
+      margin-top: 20px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(182,143,30,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(182,143,30,0.35);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <img src="assets/logo.png" alt="AllergoZymeProtect" class="logo" />
+  <h1>Paiement validé </h1>
+  <p>Merci d’avoir rejoint le réseau <strong>AllergoZymeProtect</strong> !</p>
+  <p>Votre label est désormais actif et votre QR code est prêt à être généré.</p>
+
+  <a href="dashboard.html" class="btn">Accéder à mon tableau de bord</a>
+
+  <script type="module">
+    import { supabase } from './assets/supabase.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { error } = await supabase
+          .from('restaurants')
+          .update({ has_paid: true })
+          .eq('contact_email', user.email);
+        if (error) console.error('Erreur mise à jour paiement:', error);
+      } else {
+        console.warn('Utilisateur non connecté, aucune mise à jour effectuée.');
+      }
+
+      // Redirige vers le tableau de bord après quelques secondes
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
