@@ -3,48 +3,142 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Validation client — AllergoZymeProtect</title>
-  <meta name="description" content="Validation client - page de confirmation et de traçabilité des risques allergènes.">
+  <title>Charte Officielle — AllergoZymeProtect</title>
+  <meta name="description" content="Validation client et charte de transparence alimentaire officielle — AllergoZymeProtect">
   <style>
-    :root{
+    :root {
       --gold: #c9a227;
       --gold-strong: #b68f1e;
       --white: #ffffff;
-      --text: #2b2b2b;
+      --text: #222;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:var(--white);font-family:'Poppins',sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:920px;margin:28px auto;padding:20px}
-    .brand{display:flex;align-items:center;gap:14px;margin-bottom:8px}
-    .brand img{width:88px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(201,162,39,0.16))}
-    h1{margin:0;font-size:1.6rem;color:var(--gold-strong);text-shadow:0 0 12px rgba(182,143,30,0.25)}
-    .subtitle{margin-top:6px;color:rgba(43,43,43,0.8)}
-    .card{background:var(--white);border:1px solid rgba(182,143,30,0.14);border-radius:14px;padding:22px;margin-top:18px;box-shadow:0 18px 50px rgba(182,143,30,0.06)}
-    .restaurant-info{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .rest-name{font-weight:700;font-size:1.05rem;color:var(--gold-strong)}
-    .small{font-size:0.9rem;color:rgba(43,43,43,0.8)}
-    form{margin-top:14px}
-    label{display:block;font-weight:600;margin:12px 0 6px;color:var(--gold-strong)}
-    input[type="text"], input[type="date"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(182,143,30,0.25);outline:none;font-size:1rem}
-    input[type="text"]:focus, input[type="date"]:focus{box-shadow:0 6px 18px rgba(182,143,30,0.08);border-color:var(--gold-strong)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .charte-toggle{margin-top:18px;display:flex;gap:10px;align-items:center}
-    .charte-btn{padding:10px 14px;border-radius:10px;border:1px solid rgba(182,143,30,0.18);background:linear-gradient(90deg,var(--white),#fff);cursor:pointer;box-shadow:0 8px 20px rgba(182,143,30,0.04)}
-    .charte-btn:hover{transform:translateY(-2px)}
-    .charte-box{margin-top:14px;border:1px solid rgba(182,143,30,0.12);border-radius:12px;max-height:0;overflow:hidden;transition:max-height .45s ease;padding:0}
-    .charte-box.open{max-height:420px;padding:18px;overflow:auto}
-    .charte-content{font-size:0.95rem;line-height:1.55;color:rgba(43,43,43,0.95)}
-    .charte-content h3{color:var(--gold-strong);margin-top:0}
-    .agree-row{display:flex;align-items:flex-start;gap:10px;margin-top:16px}
-    .checkbox{width:18px;height:18px;border-radius:4px;border:1px solid rgba(182,143,30,0.3);display:inline-block;position:relative}
-    .submit-btn{width:100%;margin-top:18px;padding:14px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--gold),var(--gold-strong));color:white;font-weight:700;cursor:pointer;font-size:1rem;box-shadow:0 16px 40px rgba(182,143,30,0.12)}
-    .submit-btn:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none}
-    .conf{display:none;margin-top:18px;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(201,162,39,0.06),transparent);border:1px solid rgba(182,143,30,0.12)}
-    .conf h2{margin:0;color:var(--gold-strong)}
-    .hint{font-size:0.9rem;color:rgba(43,43,43,0.7);margin-top:8px}
-    footer{margin-top:30px;text-align:center;color:rgba(43,43,43,0.6);font-size:0.88rem}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-    @media(max-width:700px){.row{grid-template-columns:1fr}.brand img{width:72px}}
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .wrap {
+      max-width: 940px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand img {
+      width: 90px;
+      filter: drop-shadow(0 0 18px rgba(182,143,30,0.3));
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--gold-strong);
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px rgba(182,143,30,0.25);
+    }
+
+    .subtitle {
+      color: rgba(0,0,0,0.6);
+      margin-top: 4px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid rgba(182,143,30,0.15);
+      padding: 24px;
+      margin-top: 20px;
+      box-shadow: 0 12px 40px rgba(182,143,30,0.08);
+    }
+
+    .rest-name {
+      color: var(--gold-strong);
+      font-weight: 700;
+    }
+
+    input[type="text"], input[type="date"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(182,143,30,0.25);
+      margin-top: 6px;
+      font-size: 1rem;
+      background: #fffdf8;
+      transition: 0.25s;
+    }
+
+    input:focus {
+      border-color: var(--gold-strong);
+      box-shadow: 0 0 10px rgba(182,143,30,0.15);
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: var(--gold-strong);
+      margin-top: 14px;
+    }
+
+    .charte {
+      margin-top: 20px;
+      max-height: 420px;
+      overflow-y: auto;
+      border: 1px solid rgba(182,143,30,0.15);
+      border-radius: 12px;
+      padding: 18px;
+      background: #fffdf7;
+    }
+
+    .charte h3 {
+      color: var(--gold-strong);
+      margin-top: 0;
+    }
+
+    .agree-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(90deg, var(--gold), var(--gold-strong));
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 14px 40px rgba(182,143,30,0.15);
+    }
+
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .conf {
+      display: none;
+      background: linear-gradient(180deg, rgba(201,162,39,0.08), transparent);
+      border: 1px solid rgba(182,143,30,0.12);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -52,255 +146,68 @@
     <div class="brand">
       <img src="assets/logo.png" alt="AllergoZymeProtect" />
       <div>
-        <h1 id="pageTitle">Validation & Consentement</h1>
-        <div class="subtitle">Prouver l’information donnée au client — sécurité et transparence</div>
+        <h1>Charte Officielle de Transparence Alimentaire</h1>
+        <div class="subtitle">Protection du consommateur et conformité du restaurateur</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="restaurant-info">
-        <div>
-          <div class="small">Établissement :</div>
-          <div class="rest-name" id="restaurantName">Chargement...</div>
-          <div class="small" id="restaurantAddr"></div>
-        </div>
-        <div style="text-align:right">
-          <div class="small">Date</div>
-          <div id="today" class="small"></div>
-        </div>
-      </div>
+      <p><strong>Établissement :</strong> <span id="restaurantName">Chargement...</span></p>
 
       <form id="signatureForm">
         <label for="firstName">Prénom</label>
-        <input id="firstName" type="text" placeholder="Ex : Julien" required>
+        <input id="firstName" type="text" required>
 
         <label for="lastName">Nom</label>
-        <input id="lastName" type="text" placeholder="Ex : Dupont" required>
+        <input id="lastName" type="text" required>
 
-        <div class="row">
-          <div>
-            <label for="birthDate">Date de naissance</label>
-            <input id="birthDate" type="date" required>
-          </div>
-          <div>
-            <label for="phoneOpt">Téléphone (optionnel)</label>
-            <input id="phoneOpt" type="text" placeholder="06 12 34 56 78">
-          </div>
+        <label for="birthDate">Date de naissance</label>
+        <input id="birthDate" type="date" required>
+
+        <label for="contact">E-mail ou numéro de téléphone</label>
+        <input id="contact" type="text" placeholder="email@exemple.fr ou 06 12 34 56 78" required>
+
+        <div class="charte">
+          <h3>Charte de Transparence et de Responsabilité — AllergoZymeProtect</h3>
+          <p>
+          Depuis 2020, les établissements certifiés AllergoZymeProtect s’engagent dans une démarche unique de prévention des risques allergiques et d’hygiène avancée. Cette charte représente un engagement moral, légal et scientifique entre le restaurateur et le consommateur. Chaque employé suit une formation complète sur la gestion des allergènes, la détection des risques, la désinfection enzymatique et la traçabilité des incidents. Les locaux sont nettoyés avec des solutions à base d’enzymes naturelles (papaïne, bromélaïne, chitinase, etc.) capables de fragmenter les protéines allergéniques. Ce processus est renouvelé plusieurs fois par jour et après chaque service. Les ustensiles, plans de travail et équipements sont isolés et désinfectés entre chaque préparation afin d’éliminer tout risque de contamination croisée.
+          </p><p>
+          Conformément au règlement (UE) n°1169/2011, les allergènes majeurs sont signalés de manière claire. Toutefois, le client est informé qu’aucune méthode ne permet de garantir une absence absolue de traces allergéniques. Le rôle de la présente charte est d’assurer la transparence et d’établir une preuve légale que l’information a été fournie avant la consommation. En validant ce document, le consommateur reconnaît avoir été informé et avoir compris les risques liés aux allergies alimentaires, aux intolérances et aux contaminations croisées.
+          </p><p>
+          L’établissement s’engage à appliquer les procédures HACCP, à maintenir une température de conservation conforme aux normes européennes, et à retirer immédiatement tout produit suspect. Chaque livraison est vérifiée, chaque lot est tracé, et chaque plat est préparé selon une logique d’exclusion allergénique. Le personnel est formé à la reconnaissance des symptômes d’allergie et d’intoxication alimentaire : œdème, urticaire, difficultés respiratoires ou digestives. En cas d’incident, les secours sont immédiatement contactés (15 / 112) et le protocole AllergoZyme d’urgence est activé.
+          </p><p>
+          Cette charte rappelle également que l’intoxication alimentaire peut résulter d’une défaillance externe indépendante de l’établissement (chaîne du froid, transport, contamination d’origine). En pareil cas, la responsabilité est évaluée selon les dispositions du Code de la consommation et du Code pénal. Cependant, le label AllergoZymeProtect atteste que le restaurateur agit de bonne foi et dans le respect total des obligations sanitaires.
+          </p><p>
+          Le stockage horodaté de votre signature électronique constitue une preuve conforme au droit européen (RGPD & eIDAS). Vos données (nom, prénom, date de naissance, contact) sont enregistrées de manière sécurisée sur les serveurs de Supabase, hébergés en Europe, pour une durée maximale de douze mois. Elles ne seront jamais revendues ni utilisées à d’autres fins. Vous pouvez à tout moment demander leur suppression en contactant l’établissement concerné.
+          </p><p>
+          En validant, vous attestez que : vous avez reçu les informations sur les allergènes, que vous avez compris les risques liés à la consommation de produits pouvant contenir des traces d’allergènes, que vous êtes informé des procédures d’hygiène appliquées, et que vous soutenez la démarche de restauration responsable mise en œuvre par le label AllergoZymeProtect.
+          </p><p>
+          Le restaurateur, de son côté, s’engage à : informer sans dissimulation, respecter les protocoles enzymatiques certifiés, maintenir la traçabilité complète des produits, garantir la formation de ses équipes, et appliquer sans interruption les standards de sécurité définis par le programme AllergoZymeProtect. Ces engagements sont révisés annuellement et contrôlés par audits indépendants. La conformité de cet établissement est renouvelée chaque année sur la base de tests de propreté protéique, de conformité documentaire et d’inspection sur site.
+          </p><p>
+          Ce document, généré automatiquement lors du scan du QR code, vaut preuve de consultation et d’accord. Il peut être présenté en cas de litige, inspection ou procédure judiciaire, comme élément de traçabilité et de bonne foi. En signant, vous contribuez à une restauration plus sûre, plus transparente et plus humaine. 
+          </p><p>
+          <strong>AllergoZymeProtect — Label de confiance et d’innovation sanitaire, version 2025.  
+          Tout client informé, tout restaurateur protégé.</strong>
+          </p>
         </div>
 
-        <!-- Charte déroulante -->
-        <div class="charte-toggle">
-          <button type="button" id="openCharte" class="charte-btn">Lire la charte complète (obligatoire)</button>
-          <div class="small" id="charteState">Non lue</div>
-        </div>
-
-        <div id="charteBox" class="charte-box" aria-hidden="true">
-          <div class="charte-content" id="charteContent">
-            <h3>Charte de transparence et d'information — AllergoZymeProtect</h3>
-
-            <p><strong>Objectif :</strong> Cette charte informe le client des risques liés à la possible présence de traces d’allergènes dans les denrées alimentaires proposées par l’établissement et formalise la preuve d’information.</p>
-
-            <p><strong>Engagement de l’établissement :</strong> L’établissement adhère au protocole AllergoZymeProtect : affichage du QR code, nettoyage des surfaces selon un protocole standardisé et formation du personnel. L’adhésion au label indique une démarche de prévention et de transparence, mais ne constitue pas une garantie absolue d’absence totale de traces.</p>
-
-            <p><strong>Information au client :</strong> Le client est informé que malgré toutes les précautions, la présence de traces d’allergènes ne peut être totalement exclue dans un environnement de préparation multi-produits (contaminations croisées). En cochant la case de validation, le client reconnaît avoir été informé de ce risque et déclare l’avoir compris.</p>
-
-            <p><strong>Limites de la décharge :</strong> Cette validation n’exonère pas l’établissement de ses obligations légales en matière d’hygiène, de conservation et de sécurité alimentaire. En cas d’intoxication alimentaire (liée à la sécurité sanitaire, contamination bactérienne, faute de conservation ou de manipulation), la responsabilité de l’établissement peut être engagée conformément au droit applicable. La présente charte vise à documenter l’information donnée au client et à tracer les consentements.</p>
-
-            <p><strong>Utilisation des données :</strong> Les informations collectées (nom, prénom, date de naissance, horodatage) sont conservées temporairement (par défaut 12 mois) et accessibles uniquement par l’établissement concerné. Elles sont stockées dans l’Union européenne, et peuvent être exportées sur demande par le restaurateur pour les besoins de transparence ou dans le cadre d’une procédure officielle.</p>
-
-            <p><strong>Preuve et prévention :</strong> Le stockage horodaté de la validation client permet au restaurateur de démontrer qu’une information a été fournie et comprise. Ce mécanisme vise principalement à réduire les litiges abusifs et à favoriser une communication transparente entre client et établissement.</p>
-
-            <p><strong>Contact & réclamations :</strong> Si vous constatez un symptôme après consommation (allergie sévère, intoxication), contactez immédiatement les services d’urgence et informez l’établissement. Les coordonnées de l’établissement figurent sur sa page dédiée.</p>
-
-            <hr style="border:none;border-top:1px solid rgba(182,143,30,0.08);margin:12px 0">
-
-            <p style="font-size:0.92rem;color:rgba(43,43,43,0.8)"><em>En validant ci-dessous, vous confirmez que vous avez pris connaissance de l’ensemble des informations ci-dessus et que vous acceptez que votre nom, prénom et date de naissance soient enregistrés temporairement pour les besoins de traçabilité et de preuve.</em></p>
-          </div>
-        </div>
-
-        <!-- Acceptation -->
         <div class="agree-row">
-          <input id="confirmRead" type="checkbox" disabled style="width:18px;height:18px;margin-top:4px" />
-          <label for="confirmRead" style="margin:0;font-weight:600;color:var(--gold-strong)">J’ai lu la charte complète et j’en accepte les termes.</label>
+          <input id="confirmRead" type="checkbox" required>
+          <label for="confirmRead">J’ai lu la charte complète et j’en accepte les termes.</label>
         </div>
 
-        <button id="submitBtn" class="submit-btn" disabled>Valider et enregistrer</button>
+        <button id="submitBtn" class="submit-btn">Valider et enregistrer</button>
       </form>
 
       <div class="conf" id="confirmation">
-        <h2>✅ Validation enregistrée</h2>
-        <p class="hint">Merci. Votre validation a été horodatée et transmise à l'établissement pour sa traçabilité. Un membre du personnel peut vous remettre un reçu si nécessaire.</p>
+        <h2>Validation enregistrée</h2>
+        <p>Votre lecture et votre validation ont été enregistrées avec horodatage. Merci pour votre confiance.</p>
       </div>
     </div>
 
-    <footer>
-      <div>AllergoZymeProtect — Transparence & sécurité • Données conservées temporairement</div>
-    </footer>
+    <footer>© 2025 AllergoZymeProtect — Label officiel de transparence alimentaire</footer>
   </div>
 
-  <script type="module">
-    import { supabase } from './assets/supabase.js';
-
-    // Utils
-    const el = (id) => document.getElementById(id);
-    const openBtn = el('openCharte');
-    const charteBox = el('charteBox');
-    const charteContent = el('charteContent');
-    const charteState = el('charteState');
-    const confirmRead = el('confirmRead');
-    const submitBtn = el('submitBtn');
-    const form = el('signatureForm');
-    const confirmation = el('confirmation');
-    const restaurantNameEl = el('restaurantName');
-    const restaurantAddrEl = el('restaurantAddr');
-    const todayEl = el('today');
-
-    // Set today display
-    const now = new Date();
-    todayEl.textContent = now.toLocaleString();
-
-    // Get restaurant id from URL: ?id=...
-    const params = new URLSearchParams(window.location.search);
-    const restaurantId = params.get('id');
-
-    if (!restaurantId) {
-      restaurantNameEl.textContent = 'Restaurant non trouvé';
-      restaurantAddrEl.textContent = 'ID manquant dans l’URL';
-    } else {
-      // Try to fetch restaurant info from Supabase (name, address)
-      (async () => {
-        try {
-          const { data, error } = await supabase
-            .from('restaurants')
-            .select('id, name, address, contact_email')
-            .eq('id', restaurantId)
-            .single();
-
-          if (error || !data) {
-            restaurantNameEl.textContent = 'Établissement introuvable';
-            restaurantAddrEl.textContent = '';
-            console.warn('Restaurant fetch error', error);
-          } else {
-            restaurantNameEl.textContent = data.name;
-            restaurantAddrEl.textContent = data.address || data.contact_email || '';
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      })();
-    }
-
-    // Open / close charte box
-    let charteOpened = false;
-    openBtn.addEventListener('click', () => {
-      charteOpened = !charteOpened;
-      if (charteOpened) {
-        charteBox.classList.add('open');
-        charteBox.setAttribute('aria-hidden', 'false');
-        charteState.textContent = 'Ouverte — faites défiler jusqu’en bas';
-        // enable scrolling listener
-        monitorScroll();
-      } else {
-        charteBox.classList.remove('open');
-        charteBox.setAttribute('aria-hidden', 'true');
-        charteState.textContent = 'Non lue';
-        confirmRead.checked = false;
-        confirmRead.disabled = true;
-        submitBtn.disabled = true;
-      }
-    });
-
-    // Monitor whether user scrolled to bottom of charte content
-    function monitorScroll() {
-      // ensure charteBox is scrollable (it has class .open)
-      const container = charteBox;
-      // set a listener
-      container.addEventListener('scroll', onScroll);
-      // also listen to touch and mouse wheel inside
-      function onScroll() {
-        const scrollTop = container.scrollTop;
-        const scrollHeight = container.scrollHeight;
-        const clientHeight = container.clientHeight;
-        // detect near-bottom (allow small tolerance)
-        if (scrollTop + clientHeight >= scrollHeight - 6) {
-          // enable checkbox
-          confirmRead.disabled = false;
-          charteState.textContent = 'Lu (vous pouvez cocher)';
-          // remove listener (we don't need to repeatedly check)
-          container.removeEventListener('scroll', onScroll);
-        }
-      }
-      // in case content shorter than container, enable immediately
-      setTimeout(() => {
-        if (container.scrollHeight <= container.clientHeight + 6) {
-          confirmRead.disabled = false;
-          charteState.textContent = 'Lu (vous pouvez cocher)';
-          container.removeEventListener('scroll', onScroll);
-        }
-      }, 120);
-    }
-
-    // Enable submit when checkbox checked
-    confirmRead.addEventListener('change', () => {
-      submitBtn.disabled = !confirmRead.checked;
-    });
-
-    // Submit handler -> insert into Supabase
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (!restaurantId) {
-        alert('ID du restaurant manquant. Contactez le personnel.');
-        return;
-      }
-
-      const first_name = el('firstName').value.trim();
-      const last_name = el('lastName').value.trim();
-      const birthdate = el('birthDate').value;
-      const phone = el('phoneOpt').value.trim();
-      const accepted = confirmRead.checked;
-
-      if (!first_name || !last_name || !birthdate || !accepted) {
-        alert('Veuillez remplir tous les champs requis et accepter la charte.');
-        return;
-      }
-
-      // collect basic meta
-      const ip = ''; // client-side can't reliably get public IP without external service; server API can store IP
-      const device = navigator.userAgent || null;
-      const created_at = new Date().toISOString();
-
-      try {
-        const { error } = await supabase.from('clients_signatures').insert([{
-          restaurant_id: restaurantId,
-          first_name,
-          last_name,
-          birthdate,
-          accepted: true,
-          ip_address: ip,
-          device,
-          phone,
-          created_at
-        }]);
-
-        if (error) {
-          console.error('Supabase insert error', error);
-          alert('Erreur lors de l’enregistrement. Veuillez réessayer.');
-          return;
-        }
-
-        // show confirmation
-        form.style.display = 'none';
-        confirmation.style.display = 'block';
-
-        // optional: send a small request to a server endpoint to log IP (if you implement backend)
-        // fetch('/api/log-signature', { method:'POST', body: JSON.stringify({restaurantId, first_name, last_name}) });
-
-      } catch (err) {
-        console.error(err);
-        alert('Erreur lors de l’enregistrement. Réessayez plus tard.');
-      }
-    });
-
-  </script>
+  <script type="module" src="assets/scan.js"></script>
 </body>
 </html>

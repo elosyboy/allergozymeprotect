@@ -10,6 +10,7 @@
       --gold: #c9a227;
       --gold-strong: #b68f1e;
       --white: #ffffff;
+      --shadow: rgba(182,143,30,0.3);
     }
 
     * { box-sizing: border-box; }
@@ -35,7 +36,7 @@
     h1 {
       font-size: 1.8em;
       color: var(--gold-strong);
-      text-shadow: 0 0 15px rgba(182,143,30,0.3);
+      text-shadow: 0 0 15px var(--shadow);
       letter-spacing: 1.5px;
       margin-bottom: 10px;
     }
@@ -106,22 +107,12 @@
     <p>Pour activer votre espace professionnel et recevoir votre QR code unique, procédez au paiement sécurisé de votre label annuel.</p>
     <div class="price">20€ / an</div>
 
-    <a href="https://www.paypal.com/webapps/hermes?token=5YS528552S022562S&useraction=commit#/checkout/login" class="btn">
-      Procéder au paiement sécurisé
-    </a>
+    <button id="paypalBtn" class="btn">Procéder au paiement sécurisé</button>
 
-    <p class="notice">Une fois le paiement validé, vous serez automatiquement redirigé vers la page de confirmation.</p>
+    <p class="notice">Une fois le paiement validé, votre compte sera activé automatiquement et vous serez redirigé vers le tableau de bord.</p>
   </div>
 
-  <script>
-    // Vérifie si l'utilisateur est bien connecté avant de payer
-    document.addEventListener('DOMContentLoaded', async () => {
-      const session = localStorage.getItem('supabaseSession');
-      if (!session) {
-        alert('Veuillez vous connecter avant d’accéder au paiement.');
-        window.location.href = 'login.html';
-      }
-    });
-  </script>
+  <!-- Script principal -->
+  <script type="module" src="assets/payment.js"></script>
 </body>
 </html>

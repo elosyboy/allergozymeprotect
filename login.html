@@ -113,6 +113,7 @@
 <body>
   <img src="assets/logo.png" alt="AllergoZymeProtect" class="logo" />
   <h1>Connexion à votre espace</h1>
+
   <form id="loginForm">
     <label for="email">Adresse email</label>
     <input type="email" id="email" name="email" placeholder="email@restaurant.fr" required />
@@ -125,26 +126,6 @@
 
   <p>Pas encore de compte ? <a href="signup.html">S’inscrire</a></p>
 
-  <script type="module">
-    import { supabase } from './assets/supabase.js';
-
-    const form = document.getElementById('loginForm');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      try {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-
-        alert('Connexion réussie ! Redirection vers votre tableau de bord.');
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        alert('Erreur : ' + err.message);
-      }
-    });
-  </script>
+  <script type="module" src="assets/login.js"></script>
 </body>
 </html>

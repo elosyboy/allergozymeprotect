@@ -4,16 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inscription — AllergoZymeProtect</title>
-  <meta name="description" content="Inscrivez votre restaurant à AllergoZymeProtect et obtenez votre QR code de traçabilité allergène en 10 minutes." />
+  <meta name="description" content="Inscrivez votre restaurant à AllergoZymeProtect et obtenez votre QR code de traçabilité allergène en quelques minutes." />
+
   <style>
     :root {
       --gold: #c9a227;
       --gold-strong: #b68f1e;
       --white: #ffffff;
+      --shadow: rgba(182,143,30,0.3);
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background: var(--white);
       font-family: 'Poppins', sans-serif;
@@ -22,6 +28,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      min-height: 100vh;
       padding: 20px;
     }
 
@@ -29,14 +36,16 @@
       width: 110px;
       margin-bottom: 20px;
       animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px var(--shadow));
     }
 
     h1 {
       font-size: 1.8em;
       color: var(--gold-strong);
-      text-shadow: 0 0 15px rgba(182,143,30,0.3);
+      text-shadow: 0 0 15px var(--shadow);
       letter-spacing: 2px;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     form {
@@ -46,7 +55,8 @@
       padding: 30px;
       width: 100%;
       max-width: 420px;
-      box-shadow: 0 10px 40px rgba(182,143,30,0.1);
+      box-shadow: 0 10px 40px rgba(182,143,30,0.15);
+      animation: fadeInUp 1s ease;
     }
 
     label {
@@ -54,6 +64,7 @@
       font-weight: 600;
       margin-top: 14px;
       margin-bottom: 6px;
+      color: var(--gold-strong);
     }
 
     input {
@@ -63,18 +74,18 @@
       border: 1px solid rgba(182,143,30,0.5);
       font-size: 1em;
       outline: none;
-      transition: 0.2s;
+      transition: all 0.2s ease;
     }
 
     input:focus {
       border-color: var(--gold-strong);
-      box-shadow: 0 0 10px rgba(182,143,30,0.3);
+      box-shadow: 0 0 10px var(--shadow);
     }
 
     .btn {
       width: 100%;
       padding: 14px;
-      margin-top: 20px;
+      margin-top: 22px;
       background: linear-gradient(90deg, var(--gold), var(--gold-strong));
       color: white;
       font-weight: 600;
@@ -83,11 +94,12 @@
       cursor: pointer;
       font-size: 1.05em;
       box-shadow: 0 10px 30px rgba(182,143,30,0.3);
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(182,143,30,0.35);
     }
 
     p {
@@ -102,17 +114,33 @@
       font-weight: 600;
     }
 
-    a:hover { text-decoration: underline; }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: var(--gold-strong);
+      opacity: 0.8;
+      text-align: center;
+    }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <img src="assets/logo.png" alt="AllergoZymeProtect" class="logo" />
   <h1>Créer votre compte restaurateur</h1>
+
   <form id="signupForm">
     <label for="name">Nom du restaurant</label>
     <input type="text" id="name" name="name" placeholder="Ex : Le Jardin Gourmand" required />
@@ -129,36 +157,14 @@
     <label for="phone">Téléphone</label>
     <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78" required />
 
-    <button type="submit" class="btn">S’inscrire et continuer</button>
+    <button type="submit" class="btn">S’inscrire et valider mon abonnement</button>
   </form>
 
   <p>Déjà inscrit ? <a href="login.html">Se connecter</a></p>
 
-  <script type="module">
-    import { supabase } from './assets/supabase.js';
+  <footer>© 2025 AllergoZymeProtect — Tous droits réservés.</footer>
 
-    const form = document.getElementById('signupForm');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const owner = document.getElementById('owner').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-
-      try {
-        const { data, error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-
-        await supabase.from('restaurants').insert([{ name, contact_email: email, phone, owner }]);
-
-        alert('Inscription réussie ! Vous allez être redirigé vers la page de paiement.');
-        window.location.href = 'payment.html';
-      } catch (err) {
-        alert('Erreur : ' + err.message);
-      }
-    });
-  </script>
+  <!-- Import du script -->
+  <script type="module" src="assets/signup.js"></script>
 </body>
 </html>
