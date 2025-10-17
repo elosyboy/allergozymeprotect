@@ -1,48 +1,50 @@
-// assets/payment.js
 import { supabase } from './supabase.js';
 
-// Vérifie la session Supabase
-document.addEventListener('DOMContentLoaded', async () => {
-  const { data: { session } } = await supabase.auth.getSession();
+// Ton lien PayPal réel
+const PAYPAL_URL = "https://www.paypal.com/webapps/hermes?token=14F09929DU2452001&useraction=commit";
 
-  if (!session) {
-    alert('Veuillez vous connecter avant d’accéder au paiement.');
-    window.location.href = 'login.html';
-    return;
-  }
+// Sélection du bouton
+const paypalBtn = document.getElementById("paypalBtn");
 
-  const user = session.user;
-  const email = user?.email;
+paypalBtn.addEventListener("click", async () => {
+  try {
+    // Vérifie si l'utilisateur est connecté
+    const { data: { session }, error } = await supabase.auth.getSession();
 
-  const paypalBtn = document.getElementById('paypalBtn');
-
-  paypalBtn.addEventListener('click', async () => {
-    try {
-      alert('🔒 Redirection vers PayPal...');
-
-      // Simulation de redirection vers PayPal
-      window.open(
-        "https://www.paypal.com/webapps/hermes?token=5YS528552S022562S&useraction=commit#/checkout/login",
-        "_blank"
-      );
-
-      // Une fois le paiement validé (simulé ici)
-      setTimeout(async () => {
-        // Mise à jour de l'état du compte
-        const { error } = await supabase
-          .from('restaurants')
-          .update({ subscription_status: 'active', payment_date: new Date().toISOString() })
-          .eq('contact_email', email);
-
-        if (error) throw error;
-
-        alert('✅ Paiement confirmé ! Votre espace est maintenant actif.');
-        window.location.href = 'dashboard.html';
-      }, 7000); // délai simulé de 7s
-
-    } catch (err) {
-      console.error('Erreur de paiement :', err);
-      alert('❌ Une erreur est survenue lors de la mise à jour du paiement.');
+    if (error) {
+      console.error(error);
+      alert("Erreur lors de la vérification de session.");
+      return;
     }
-  });
+
+    if (!session) {
+      alert("Veuillez vous connecter avant d’accéder au paiement.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Récupère l'utilisateur actuel
+    const user = session.user;
+
+    // Met à jour le profil dans la table "restaurants"
+    const { error: updateError } = await supabase
+      .from("restaurants")
+      .update({
+        has_paid: true,
+        paid_until: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()
+      })
+      .eq("contact_email", user.email);
+
+    if (updateError) {
+      console.error(updateError);
+      alert("Erreur lors de l'activation du compte dans la base de données.");
+      return;
+    }
+
+    // Redirection réelle vers PayPal
+    window.location.href = PAYPAL_URL;
+  } catch (err) {
+    console.error(err);
+    alert("Erreur inattendue : " + err.message);
+  }
 });

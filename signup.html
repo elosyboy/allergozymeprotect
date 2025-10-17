@@ -14,11 +14,7 @@
       --shadow: rgba(182,143,30,0.3);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--white);
@@ -114,9 +110,7 @@
       font-weight: 600;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
     footer {
       margin-top: 40px;
@@ -164,7 +158,65 @@
 
   <footer>© 2025 AllergoZymeProtect — Tous droits réservés.</footer>
 
-  <!-- Import du script -->
-  <script type="module" src="assets/signup.js"></script>
+  <!-- 💾 SCRIPT SUPABASE ET LOGIQUE D'INSCRIPTION -->
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const SUPABASE_URL = "https://fnkkksacsvvbetcbcqan.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZua2trc2Fjc3Z2YmV0Y2JjcWFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NzQzMTksImV4cCI6MjA3NjA1MDMxOX0.T68q25FUP7K7lUDNTMG35MVaH3TKUpKawfE7ZCn1BNI";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const PAYPAL_URL = "https://www.paypal.com/webapps/hermes?token=14F09929DU2452001&useraction=commit&return=https://allergozymeprotect.fr/succes.html";
+
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const owner = document.getElementById("owner").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!name || !owner || !email || !password || !phone) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      try {
+        // 🔹 Étape 1 : Créer le compte utilisateur
+        const { data: signupData, error: signupError } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+
+        if (signupError) throw signupError;
+
+        // 🔹 Étape 2 : Insérer les infos dans la table restaurants
+        const { error: insertError } = await supabase
+          .from("restaurants")
+          .insert([
+            {
+              restaurant_name: name,
+              owner_name: owner,
+              contact_email: email,
+              phone: phone,
+              has_paid: false,
+              created_at: new Date().toISOString(),
+            },
+          ]);
+
+        if (insertError) throw insertError;
+
+        // 🔹 Étape 3 : Redirection immédiate vers PayPal réel
+        alert("Inscription réussie ✅\nVous allez être redirigé vers le paiement sécurisé.");
+        window.location.href = PAYPAL_URL;
+
+      } catch (error) {
+        console.error(error);
+        alert("Erreur : " + error.message);
+      }
+    });
+  </script>
 </body>
 </html>

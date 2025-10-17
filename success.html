@@ -10,6 +10,7 @@
       --gold: #c9a227;
       --gold-strong: #b68f1e;
       --white: #ffffff;
+      --shadow: rgba(182,143,30,0.25);
     }
 
     * { box-sizing: border-box; }
@@ -23,36 +24,44 @@
       justify-content: center;
       flex-direction: column;
       text-align: center;
-      padding: 20px;
+      padding: 30px;
       animation: fadeIn 1s ease;
     }
 
     .logo {
-      width: 110px;
-      margin-bottom: 16px;
+      width: 120px;
+      margin-bottom: 18px;
       animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 5px 15px var(--shadow));
     }
 
     h1 {
-      font-size: 1.9em;
+      font-size: 2em;
       color: var(--gold-strong);
-      text-shadow: 0 0 18px rgba(182,143,30,0.3);
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
+      text-shadow: 0 0 18px var(--shadow);
+      letter-spacing: 1.4px;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 1em;
+      font-size: 1.05em;
       margin-top: 6px;
       line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .success {
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: rgba(43,43,43,0.8);
     }
 
     .btn {
       display: inline-block;
       background: linear-gradient(90deg, var(--gold), var(--gold-strong));
       color: white;
-      padding: 14px 26px;
-      margin-top: 20px;
+      padding: 14px 30px;
+      margin-top: 25px;
       font-weight: 600;
       border-radius: 12px;
       text-decoration: none;
@@ -78,31 +87,59 @@
 </head>
 <body>
   <img src="assets/logo.png" alt="AllergoZymeProtect" class="logo" />
-  <h1>Paiement validé </h1>
-  <p>Merci d’avoir rejoint le réseau <strong>AllergoZymeProtect</strong> !</p>
-  <p>Votre label est désormais actif et votre QR code est prêt à être généré.</p>
+  <h1>Paiement validé</h1>
+
+  <p><strong>Merci d’avoir rejoint le réseau AllergoZymeProtect.</strong></p>
+  <p>Votre abonnement est maintenant <strong>actif</strong> et votre espace professionnel est débloqué.</p>
+  <p class="success">Redirection automatique vers votre tableau de bord dans quelques secondes...</p>
 
   <a href="dashboard.html" class="btn">Accéder à mon tableau de bord</a>
 
   <script type="module">
-    import { supabase } from './assets/supabase.js';
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const SUPABASE_URL = "https://fnkkksacsvvbetcbcqan.supabase.co";
+    const SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZua2trc2Fjc3Z2YmV0Y2JjcWFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NzQzMTksImV4cCI6MjA3NjA1MDMxOX0.T68q25FUP7K7lUDNTMG35MVaH3TKUpKawfE7ZCn1BNI";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { error } = await supabase
-          .from('restaurants')
-          .update({ has_paid: true })
-          .eq('contact_email', user.email);
-        if (error) console.error('Erreur mise à jour paiement:', error);
-      } else {
-        console.warn('Utilisateur non connecté, aucune mise à jour effectuée.');
-      }
+      try {
+        // 🔹 Récupère l’email depuis l’URL PayPal (si présent)
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get('email');
 
-      // Redirige vers le tableau de bord après quelques secondes
-      setTimeout(() => {
-        window.location.href = 'dashboard.html';
-      }, 5000);
+        // 🔹 Si pas d’email, afficher un message
+        if (!email) {
+          console.warn("Aucun email trouvé dans l’URL — mise à jour générale par défaut.");
+        }
+
+        const now = new Date();
+        const nextYear = new Date(now.setFullYear(now.getFullYear() + 1)).toISOString();
+
+        // 🔹 Met à jour le compte dans la table restaurants
+        const { error: updateError } = await supabase
+          .from('restaurants')
+          .update({
+            has_paid: true,
+            paid_until: nextYear,
+          })
+          .eq('contact_email', email);
+
+        if (updateError) {
+          console.error('❌ Erreur de mise à jour du paiement :', updateError);
+        } else {
+          console.log('✅ Paiement validé et compte activé sur Supabase.');
+        }
+
+        // 🔹 Redirection automatique
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 5000);
+
+      } catch (err) {
+        console.error('Erreur inattendue :', err);
+      }
     });
   </script>
 </body>
